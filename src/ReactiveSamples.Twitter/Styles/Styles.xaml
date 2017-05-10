@@ -1,0 +1,272 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="White">#FFFFFF</Color>
+    <Color x:Key="Gray">#FF1E1E1E</Color>
+    <Color x:Key="Orange">#FFF49F24</Color>
+    <Color x:Key="DarkOrange">#FFAD6E15</Color>
+
+    <SolidColorBrush x:Key="Control|Background"
+                     Color="{StaticResource Gray}" />
+
+    <SolidColorBrush x:Key="Control|Foreground"
+                     Color="{StaticResource White}" />
+
+    <!-- ToggleButton -->
+    <Style TargetType="{x:Type ToggleButton}">
+        <Setter Property="Background"
+                Value="Black" />
+        <Setter Property="Foreground"
+                Value="Black" />
+        <Setter Property="Background"
+                Value="White" />
+        <Setter Property="BorderBrush"
+                Value="Black" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="UseLayoutRounding"
+                Value="True" />
+        <Setter Property="Height"
+                Value="20" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="knob"
+                                                                       Storyboard.TargetProperty="(Ellipse.RenderTransform).(TranslateTransform.X)">
+                                            <SplineDoubleKeyFrame KeyTime="0"
+                                                                  Value="3" />
+                                            <SplineDoubleKeyFrame KeyTime="0:0:0.35"
+                                                                  Value="17"
+                                                                  KeySpline="0, 1, 0.7, 1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <ColorAnimation Storyboard.TargetName="knob"
+                                                        Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)"
+                                                        Duration="0"
+                                                        To="White" />
+                                        <ColorAnimation Storyboard.TargetName="track"
+                                                        Storyboard.TargetProperty="(Path.Fill).(SolidColorBrush.Color)"
+                                                        Duration="0"
+                                                        To="{StaticResource Orange}" />
+                                        <ColorAnimation Storyboard.TargetName="track"
+                                                        Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)"
+                                                        Duration="0"
+                                                        To="Transparent" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="knob"
+                                                                       Storyboard.TargetProperty="(Ellipse.RenderTransform).(TranslateTransform.X)">
+                                            <SplineDoubleKeyFrame KeyTime="0"
+                                                                  Value="17" />
+                                            <SplineDoubleKeyFrame KeyTime="0:0:0.35"
+                                                                  Value="3"
+                                                                  KeySpline="0, 0.5, 0.5, 1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Viewbox Stretch="Uniform">
+                            <Canvas Width="20"
+                                    Height="14">
+
+                                <Path x:Name="track"
+                                      Data="F1 M 329.167,266C 329.167,269.682 326.182,272.667 322.5,272.667L 309.167,272.667C 305.485,272.667 302.5,269.682 302.5,266L 302.5,266C 302.5,262.318 305.485,259.333 309.167,259.333L 322.5,259.333C 326.182,259.333 329.167,262.318 329.167,266 Z "
+                                      Fill="{TemplateBinding Background}"
+                                      Stroke="{TemplateBinding Foreground}"
+                                      StrokeThickness="1"
+                                      Stretch="Fill" />
+
+                                <Ellipse x:Name="knob"
+                                         Fill="{TemplateBinding Foreground}"
+                                         Height="8"
+                                         Width="8">
+                                    <Ellipse.RenderTransform>
+                                        <TranslateTransform X="3"
+                                                            Y="3" />
+                                    </Ellipse.RenderTransform>
+                                </Ellipse>
+                            </Canvas>
+                        </Viewbox>
+                        <ContentPresenter Grid.Column="1"
+                                          TextBlock.Foreground="{StaticResource Control|Foreground}"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Margin="20,0,0,0" />
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- TextBlock -->
+    <Style x:Key="TextBlock|Base"
+           TargetType="TextBlock">
+        <Setter Property="Foreground"
+                Value="{StaticResource Control|Foreground}" />
+    </Style>
+
+    <Style x:Key="TextBlock|Header"
+           BasedOn="{StaticResource TextBlock|Base}"
+           TargetType="TextBlock">
+        <Setter Property="FontSize" 
+                Value="20"/>
+        <Setter Property="FontWeight"
+                Value="Medium" />
+    </Style>
+
+    <Style x:Key="TextBlock|Subheader"
+           BasedOn="{StaticResource TextBlock|Base}"
+           TargetType="TextBlock">
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="FontStyle"
+                Value="Italic" />
+    </Style>
+
+    <Style x:Key="TextBlock|Counter"
+           TargetType="TextBlock">
+        <Setter Property="Background"
+                Value="#FF5B5853" />
+        <Setter Property="Foreground"
+                Value="White" />
+        <Setter Property="FontSize"
+                Value="20" />
+        <Setter Property="FontWeight"
+                Value="Bold" />
+        <Setter Property="Padding"
+                Value="4" />
+        <Setter Property="HorizontalAlignment"
+                Value="Stretch" />
+        <Setter Property="TextAlignment"
+                Value="Center" />
+    </Style>
+
+    <!-- ListBox -->
+    <Style x:Key="DefaultListBoxItemStyle" 
+           TargetType="ListBoxItem">
+        <Setter Property="HorizontalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="border"
+                            Margin="6"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            BorderThickness="2">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="border"
+                                                        Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                        Duration="0:0:0.15"
+                                                        To="Transparent" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="border"
+                                                        Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                        Duration="0:0:0.15"
+                                                        To="White"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="SelectionStates">
+                                <VisualState x:Name="Selected">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="border"
+                                                        Storyboard.TargetProperty="Background.Color"
+                                                        Duration="0:0:0.15"
+                                                        To="{StaticResource Orange}" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unselected">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="border"
+                                                        Storyboard.TargetProperty="Background.Color"
+                                                        Duration="0:0:0.15"
+                                                        To="Transparent" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="EmptyListBoxItemStyle"
+           TargetType="ListBoxItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border>
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="LayoutTransform">
+            <Setter.Value>
+                <ScaleTransform x:Name="transform" />
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="LayoutTransform.ScaleY">
+                                <EasingDoubleKeyFrame Value="0"
+                                                      KeyTime="0" />
+                                <EasingDoubleKeyFrame Value="1"
+                                                      KeyTime="0:0:0.15"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="ListBox">
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
+                Value="Disabled" />
+    </Style>
+
+</ResourceDictionary>
