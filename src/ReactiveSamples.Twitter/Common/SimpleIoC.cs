@@ -7,9 +7,11 @@ namespace ReactiveSamples.Twitter.Common
 {
     /// <summary>
     /// Simple implementation of an IoC (inversion of control) container. All registered  types are treated as singletons.
+    /// We used an own implementation here to avoid the complexity to set up a real IoC container framework like MEF.
+    /// The intention of this sample project is to show Rx.
     /// </summary>
     /// <remarks>
-    /// Do NOT use this in production. 
+    /// Do NOT use this in production. Better use professional solutions like MEF.
     /// </remarks>
     public static class SimpleIoC
     {
