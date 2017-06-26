@@ -40,7 +40,11 @@ WPF and XAML
 2. Press CTRL + SHIFT + B to build all projects
 
 ## Run samples
-Because we use the Twitter API, you have to [register an app](https://apps.twitter.com/) and create a consumer key, consumer token, an access token and access token secret.
+You have two options to run the app. You can run it standalone without twitter services by using a simulation or you can connect the app to your twitter app account.
+For the first option you can compile and run the app and switch a slider on the UI to value "is simulating". After that you may select one emoticon and wait for incoming simulated tweet messages. 
+For the latter you need a registered twitter account. Then you can get real twitter data and have a real world twitter service experience.
+
+For using the Twitter API, you have to [register an app](https://apps.twitter.com/) and create a consumer key, consumer token, an access token and access token secret.
 Create a file **Keys.cfg** in **src/ReactiveSamples.Twitter/** and add your keys and tokens in the following style:
 ```
 ConsumerKey=YOUR_CONSUMER_KEY
